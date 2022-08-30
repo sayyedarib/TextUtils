@@ -20,11 +20,7 @@ export default function TextForm(props) {
   };
 
   const handleCopy = () => {
-    var text = document.getElementById("myBox");
-    text.select();
-    text.setSelectionRange(0, 9999);
-    navigator.clipboard.writeText(text.value);
-    document.getSelection().removeAllRanges();
+    navigator.clipboard.writeText(text);
   };
 
   const handleExtraSpace = () => {
@@ -33,7 +29,6 @@ export default function TextForm(props) {
   };
 
   const handleOnChange = (event) => {
-    console.log("something changed");
     setText(event.target.value);
   };
 
@@ -76,7 +71,7 @@ export default function TextForm(props) {
       <div className="container my-4">
         <h1>Your text summary</h1>
         <p>
-          {text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters
+          {text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters
         </p>
         <p>Reading time:{text.split(" ").filter((element)=>{return element.length!==0}).length * 0.008} minute</p>
         <h2>Preview</h2>
